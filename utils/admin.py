@@ -34,6 +34,8 @@ def showall():
     for i in admins.find():
         print(i)
 
-
+if __name__ == '__main__':
+    createadmin("admin2","09876")
+    showall()
 
 
