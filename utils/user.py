@@ -36,5 +36,6 @@ def showall():
 
 
 if __name__ == '__main__':
-    createuser('user1','111')
+    # createuser('user1','111')
+    print(loginuser('user1','111'))
     showall()

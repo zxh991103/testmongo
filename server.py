@@ -4,26 +4,53 @@ from werkzeug.utils import secure_filename
 import os
 import test
 app = Flask(__name__)
+
+
+# 商城界面
+@app.route('/mall')
+def mallindex():
+   return render_template('mallindex.html')
+
+# 管理员菜单
+@app.route('/aumanage')
+def managelindex():
+   return render_template('manage.html')
+
+# 用户初始选择
 @app.route('/')
-def hello_world():
-   return render_template('i1.html')
+def index():
+   return render_template('indexFor2.html')
 
 
-
-@app.route('/login', methods=['GET', 'POST'])
+# 管理员登录
+@app.route('/aulogin', methods=['GET', 'POST'])
 def login():
     from utils import admin
     if request.method == 'POST':
-        nm = request.form['nm']
-        pd = request.form['pd']
+        nm = request.form['username']
+        pd = request.form['password']
         if admin.loginau(nm,pd):
-            return "login success"
+            return redirect(url_for('managelindex'))
         else:
             return "login fail"
 
-    return render_template('index.html')
+    return render_template('aulogin.html')
 
 
+# 用户登录 直接跳转到商城
+@app.route('/userlogin', methods=['GET', 'POST'])
+def userlogin():
+    from utils import user
+    if request.method == 'POST':
+        nm = request.form['username']
+        pd = request.form['password']
+        print(nm,pd)
+        if user.loginuser(nm,pd):
+            return redirect(url_for('mallindex'))
+        else:
+            return "login fail"
+
+    return render_template('userlogin.html')
 
 
 @app.route('/upload',methods=['GET','POST'])
@@ -53,4 +80,4 @@ def upload():
 
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0')
+   app.run(host='127.0.0.1',debug=True)

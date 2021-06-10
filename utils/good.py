@@ -33,7 +33,6 @@ def addgoods(id,name,price,contain):
         }
     }
     x = goods.insert_one(newgood)
-
     return True
 
 def deletegoods(id):

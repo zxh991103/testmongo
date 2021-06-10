@@ -35,7 +35,7 @@ def showall():
         print(i)
 
 if __name__ == '__main__':
-    createadmin("admin2","09876")
+    # createadmin("admin2","09876")
     showall()
 
 
